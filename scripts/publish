@@ -5,4 +5,5 @@ cd $HOME/projects/ozzieperez.github.io
 git add -A
 git status
 git commit -am "Publish"
-git push origin mainecho "DONE"
+git push origin main
+echo "DONE"

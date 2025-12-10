@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+cd $HOME/projects/ozzieperez.github.io 
+git add -A
+git status
+git commit -am "Publish"
+git push origin mainecho "DONE"

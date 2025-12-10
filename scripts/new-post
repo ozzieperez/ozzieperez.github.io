@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -e
+
+if [ -z "$1" ]; then
+  echo "Usage: ./new-post \"Post title\""
+  exit 1
+fi
+
+TITLE="$*"
+DATE=$(date +%Y-%m-%d)
+TIME=$(date +%H:%M:%S%z)
+
+# slugify the title: lowercase, spaces -> dashes, strip non-alnum
+SLUG=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | \
+  sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')
+
+FILE="${HOME}/projects/ozzieperez.github.io/_posts/${DATE}-${SLUG}.md"
+
+if [ -e "$FILE" ]; then
+  echo "File already exists: $FILE"
+  exit 1
+fi
+
+cat > "$FILE" <<EOF2
+---
+layout: post
+title: "$TITLE"
+subtitle:
+cover-img:
+thumbnail-img:
+comments:
+tags:
+
+share-title:
+share-description:
+share-img:
+
+author:
+readtime:
+show-avatar: false
+social-share: true
+nav-short: true
+gh-repo: 
+gh-badge:
+last-updated:
+
+
+date: ${DATE} ${TIME}
+---
+
+Write your post here...
+EOF2
+
+# Open in your editor
+# ${EDITOR:-nano} "$FILE"
+code "$FILE" # vscode
+
+# After editor exits, commit & push
+git add "$FILE"
+git commit -m "post: $TITLE"
+git push
+
+echo "Published: $FILE"

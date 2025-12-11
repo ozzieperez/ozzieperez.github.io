@@ -998,10 +998,11 @@ pre {
 }
 
 .blog-post hr {
-  max-width: 25%;
-  border-width: 0.25rem;
+  /* max-width: 25%; */
+  border-width: 0.15rem;
   border-radius: 0.1875rem;
   border-color: var(--mid-col);
+  margin: 3rem auto;
 }
 
 .blog-post blockquote {
